@@ -1,6 +1,6 @@
 [user]
-	name = Andrew Marshall
-	email = andrew@johnandrewmarshall.com
+	name = Ken Louie
+	email = klouie01@gmail.com
 [core]
 	autocrlf = input
 	excludesfile = ~/.gitignore

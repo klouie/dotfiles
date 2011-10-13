@@ -33,11 +33,9 @@ autocmd FocusLost * silent! wall
 set autowriteall
 
 " Soft tabs, 2 spaces
-set expandtab
-set shiftwidth=2
+set shiftwidth=4
 set smarttab
-set tabstop=2
-set list listchars=tab:»·,trail:·
+set tabstop=4
 
 " Persistent undo
 if(has("persistent_undo"))

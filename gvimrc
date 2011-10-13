@@ -1,6 +1,6 @@
 colorscheme solarized
 set background=dark
-set guifont=Menlo:h12,"Deja Vu Sans":h12,Consolas:h12
+set guifont="Deja Vu Sans":h12,Consolas:h12
 set linespace=2
 
 set cursorline

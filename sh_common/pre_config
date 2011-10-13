@@ -5,4 +5,4 @@
 # prevent conflicts when merging with upstream. Do this by running:
 # `git update-index --assume-unchanged sh_common/pre_config`.
 
-export SH_USERNAME=amarshall
+export SH_USERNAME=kenny
