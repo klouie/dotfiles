@@ -9,8 +9,18 @@
 [alias]
 	amend = commit --amend -C HEAD
 	co = checkout
+	dc = diff --cached
+	l = !". ~/.sh_common/functions/pretty_git_log && pretty_git_log"
+	pop = reset --soft head~1
 	st = status
+	unpulled = !"PROJ_BRANCH=$(git symbolic-ref HEAD | sed 's|refs/heads/||') && git fetch && git log HEAD..origin/$PROJ_BRANCH"
+	unpushed = !"PROJ_BRANCH=$(git symbolic-ref HEAD | sed 's|refs/heads/||') && git log origin/$PROJ_BRANCH..HEAD"
 [push]
 	default = current
 [format]
-	pretty = format:"%h%Cred%d %C(yellow)%cr%Creset %Cgreen%an%Creset | %s"
+	pretty = format:"%C(yellow)%h%Creset %Cgreen%ad%Creset %C(cyan)%an%Creset%C(red)%d%Creset %s"
+[pager]
+	unpushed = false
+	unpulled = false
+[log]
+	date = relative

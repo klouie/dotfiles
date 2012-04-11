@@ -1,3 +1,6 @@
+" NOTICE! The vimpagerrc file is a subset of this, please check that
+"         what is being changed here is updated there if it exists.
+
 set nocompatible
 
 call pathogen#helptags()
@@ -7,22 +10,14 @@ let mapleader = ","
 
 set backspace=indent,eol,start
 set hidden
-set ignorecase
-set incsearch
 set laststatus=2
 set nowrap
 set number
 set ruler
 set scrolloff=3
 set showcmd
-set smartcase
 set splitbelow splitright
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P  " Git branch in status line
-set wildignore+=*.class,*.o,.git
-
-set autoindent
-set smartindent
-filetype plugin indent on
+set wildignore+=*.class,*.o,.git,*/tmp/**
 
 " Store backup & swap files elsewhere to avoid directory pollution
 set backupdir=~/.vim/tmp,/tmp
@@ -32,10 +27,23 @@ set directory=~/.vim/tmp,/tmp
 autocmd FocusLost * silent! wall
 set autowriteall
 
-" Soft tabs, 2 spaces
+" ...but not for fugitive buffers
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
+" Search settings
+set ignorecase
+set incsearch
+set smartcase
+
+" Indentation settings (soft tabs, two spaces)
+set autoindent
+set expandtab
 set shiftwidth=4
+set smartindent
 set smarttab
 set tabstop=4
+set list listchars=tab:»·,trail:·
+filetype plugin indent on
 
 " Persistent undo
 if(has("persistent_undo"))
@@ -44,10 +52,14 @@ if(has("persistent_undo"))
   set undolevels=1000
 endif
 
+if has('gui_running') || $TERM_PROGRAM != 'Apple_Terminal'
+  set background=dark
+  colorscheme solarized
+endif
+
 " Highlight if there is color
 if(&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
   syntax on
-  set hlsearch
   nnoremap <silent> <leader>h :set hlsearch!<CR>
 endif
 
@@ -73,19 +85,14 @@ map Y y$
 vmap <tab> >gv
 vmap <s-tab> <gv
 
-" Command-T
-if(has("ruby"))
-  let g:CommandTMaxHeight=20
-  map <leader>t :CommandT<CR>
-  map <leader>B :CommandTBuffer<CR>
-endif
-
-" FuzzyFinder
-if(has("macunix"))
-  map <D-e> :FufBuffer<CR>
-elseif(has("unix") || has("win32"))
-  map <C-e> :FufBuffer<CR>
-endif
+" CtrlP
+let g:ctrlp_max_height=20
+let g:ctrlp_match_window_reversed=0
+let g:ctrlp_use_caching=0
+map <D-N>     :CtrlP<CR>
+map <leader>b :CtrlPBuffer<CR>
+map <D-e>     :CtrlPBuffer<CR>
+map <leader>e :e#<CR>
 
 " Gundo
 nnoremap <leader>u :GundoToggle<CR>
@@ -123,8 +130,6 @@ autocmd BufRead,BufNewFile *.applescript set filetype=applescript
 autocmd BufRead,BufNewFile *.json set filetype=javascript
 autocmd BufRead,BufNewFile *.txt set filetype=text
 
-" Set question mark to be part of a VIM word in Ruby
-autocmd FileType ruby set iskeyword=@,48-57,_,?,!,192-255
 autocmd FileType scss set iskeyword=@,48-57,_,-,?,!,192-255
 
 " Enable soft-wrapping for text files

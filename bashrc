@@ -1,9 +1,10 @@
 . ~/.sh_common/pre_config
-. ~/.bash/constants
 . ~/.bash/paths
+. ~/.bash/constants
 . ~/.bash/aliases
+for f in ~/.sh_common/functions/*; do . $f; done
 
-if $IS_INTERACTIVE ; then
+if [[ $- == *i* ]] ; then
   . ~/.bash/config
   . ~/.bash/completions
 fi

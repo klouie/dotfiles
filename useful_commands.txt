@@ -1,0 +1,25 @@
+# Here lies some useful commands that are awesome but are usually too
+# rarely used to remember. They are useful for...
+
+# ...validating a binary's code signature
+codesign -v /Applications/Example.app
+
+# ...determining DNS info
+dig @8.8.8.8 example.com any
+
+# ...determining the architectures within a universal binary
+file
+
+# ...finding C/C++ standard libraries
+`gcc -print-prog-name=cc1` -v
+`gcc -print-prog-name=cc1plus` -v
+
+# ...updating all git submodules
+git submodule foreach git pull origin master
+
+# ...finding what package installed a binary (Ubuntu/Debian)
+dpkg -S `which examplebinary`
+
+# ...searching for a string/regex in git diff history
+git -Sstringtosearchfor --since=2012.2.17 --until=2012.3.14 -- pathname
+git --pickaxe-regex "regextosearchfor" --since=2012.2.17 --until=2012.3.14 --pathname

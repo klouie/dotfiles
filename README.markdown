@@ -11,12 +11,23 @@ Clone the repository, `cd` into its directory, then run `./install.sh`.
 Currently targeting primarily Mac OS X with
 [Homebrew](http://mxcl.github.com/homebrew). Running with no known
 problems on Ubuntu 10.04 Server as well. Likes
-[RVM](https://rvm.beginrescueend.com/).
+[rbenv](https://github.com/sstephenson/rbenv) &
+[RVM](https://rvm.beginrescueend.com/). Designed to not load/set items
+that are irrelevant on the current platform.
 
-Originally Bash-only, but since have added ZSH support. Most of the
-Bash features and configuration have been ported over, though the ZSH
-prompt intentionally stands in stark contrast to the Bash prompt. That
-may be backported to the Bash configuration, though.
+## Customizing ##
+Bash, Zsh, & Vim all support "localrc" files in the home directory which are
+loaded after all other configuration:
+
+- Bash: `.bashrc_local`
+- Zsh: `.zshrc_local`
+- Bash & Zsh: `.sh_common_local`
+- Vim: `.vimrc_local`
+
+The preferred method of achieving this is by placing the files in the `localrcs`
+directory, prefixed with your machine's name (as displayed by `hostname`). When
+running the install script these will automatically be linked accordingly. This
+allows machine-specific configuration.
 
 ## Notable features ##
 There’s a lot more than what is listed here, as there are too many
@@ -33,6 +44,8 @@ small features to list. Explore the code to find everything.
   (since hopefully you know what machine you’re on then).
 - `c` command for quick switching to code projects (in multiple
   directories), with tab-completion.
+- On OS X Lion, includes a port of Bash’s copying of the current
+  directory when opening a new tab in Terminal.app.
 
 ### Bash & ZSH ###
 - `extract` command to uncompress most common formats.
@@ -41,17 +54,12 @@ small features to list. Explore the code to find everything.
 - `pman` command to open a man page in Preview,
   respectively (Mac only).
 
-### IRB & Rails ###
-- Loads IRB gems (e.g. [Wirble](http://pablotron.org/software/wirble/),
-  [Hirb](http://tagaholic.me/2009/03/13/hirb-irb-on-the-good-stuff.html),
-  etc.) in the Rails console if they are included in RVM’s “global”
-  gemset, even if they aren’t listed in the current app’s Gemfile.
-
 ## Credits ##
 Original inspiration from [Ryan Bates](https://github.com/ryanb/dotfiles).
 
 Various parts inspired by or adapted from
 [Brian Racer](https://github.com/anveo/dotfiles),
-[Todd Werth](https://github.com/twerth/dotfiles), &
+[Todd Werth](https://github.com/twerth/dotfiles),
+[Gary Bernhardt](https://github.com/garybernhardt/dotfiles), &
 [Pivotal Labs](https://github.com/pivotal/vim-config)/[Case Commons](https://github.com/Casecommons/vim-config).
 Other credits not listed here may be noted in comments.
